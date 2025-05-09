@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 
 const navigation = [
     { name: 'Product', href: '#' },
@@ -11,6 +11,8 @@ const navigation = [
   ]
 const Header = ()=>{
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const {url} = usePage();
+    const isHomePage = url === "/home";
     return(
         <header className="absolute inset-x-0 top-0 z-50">
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
@@ -42,9 +44,11 @@ const Header = ()=>{
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            {!isHomePage && (
             <Link href="/login" className="text-sm/6 font-semibold text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
+            )}
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">

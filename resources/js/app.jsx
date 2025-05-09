@@ -8,7 +8,15 @@ createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
     let page = pages[`./Pages/${name}.jsx`];
-    page.default.layout = page.default.layout || (page => <Layout children={page}/>);
+    if (page.default.layout) {
+      if (name === "HomePage") {
+          // Do not apply default Layout for Home page
+          page.default.layout = page => <HomeLayout>{page}</HomeLayout>;
+      } else {
+          // Apply default Layout for other pages
+          page.default.layout = page => <Layout>{page}</Layout>;
+      }
+  }
     return page;
   },
   setup({ el, App, props }) {

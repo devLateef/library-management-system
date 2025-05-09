@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return Inertia::render('LoginForm');
 });
+Route::get('/register', function () {
+    return Inertia::render('RegisterForm');
+});
+Route::get('/home', function () {
+    return Inertia::render('HomePage');
+});
