@@ -30,7 +30,7 @@ class AuthController extends Controller
 
     public function showDashboard()
     {
-        return Inertia::render('Layouts/DashboardLayout');
+        return Inertia::render('Books/AllBooks');
     }
 
     public function register(RegisterRequest $request)

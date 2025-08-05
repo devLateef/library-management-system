@@ -32,6 +32,7 @@ class BookFactory extends Factory
                 'History',
                 'Mystery',
             ]),
+            'status' => 'Available',
         ];
     }
 }

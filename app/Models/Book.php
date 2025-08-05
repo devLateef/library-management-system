@@ -16,6 +16,7 @@ class Book extends Model
         'publisher',
         'accession_no',
         'call_no',
-        'category'
+        'category',
+        'status'
     ];
 }
