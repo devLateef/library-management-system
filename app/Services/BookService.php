@@ -25,4 +25,24 @@
                 throw new CustomException('Unable to create book');
             }
         }
+
+        public function editBook(array $data, Book $book): Book
+        {
+            try{
+                // $book = Book::findOrFail($id);
+                $book->update([
+                    'name' => $data['name'],
+                    'author' => $data['author'],
+                    'publisher' => $data['publisher'],
+                    'accession_no' => $data['accession_no'],
+                    'isbn' => $data['isbn'],
+                    'call_no' => $data['call_no'],
+                    'category' => $data['category'],
+                ]);
+                return $book;
+            } catch(\Throwable $th){
+                logger()->error($th);
+                throw new CustomException('Unable to update book');
+            }
+        }
     }

@@ -1,10 +1,10 @@
 import BookForm from "../BookForm";
 import DashboardLayout from "../Layouts/DashboardLayout";
 
-const Create = () => {
+const Create = ({book, isEdit}) => {
     return (
         <DashboardLayout>
-            <BookForm />
+            <BookForm book={book} isEdit={isEdit}/>
         </DashboardLayout>
     );
 };

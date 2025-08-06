@@ -15,7 +15,22 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::with(['latestTransaction'])->get();
+
+        return Inertia::render('Books/Index', [
+            'books' => $books->map(function ($book) {
+                return [
+                    'id' => $book->id,
+                    'name' => $book->name,
+                    'author' => $book->author,
+                    'publisher' => $book->publisher,
+                    'isbn' => $book->isbn,
+                    'category' => $book->category,
+                    'status' => $book->status,
+                    'due_date' => optional($book->latestTransaction)->due_date,
+                ];
+            }),
+        ]);
     }
 
     /**
@@ -23,7 +38,10 @@ class BookController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Books/Create');
+        return Inertia::render('Books/Create', [
+            'book' => null,
+            'isEdit' => false
+        ]);
     }
 
     /**
@@ -52,7 +70,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return Inertia::render('Books/Show', [
+            'book' => $book,
+        ]);
     }
 
     /**
@@ -60,15 +80,20 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return Inertia::render('Books/Create', [
+            'book' => $book,
+            'isEdit' => true
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, BookService $bookService, Book $book)
     {
-        //
+        $data = $request->validated();
+        $bookService->editBook($data, $book);
+        return redirect('dashboard')->with('message', 'Book Updated Successfully');
     }
 
     /**
@@ -76,6 +101,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        // $book = Book::findOrFail($id);
+        $book->delete();
+        return redirect()->back()->with('message', 'Book Deleted Successfully');
     }
 }

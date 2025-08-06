@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\CustomException;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -16,9 +17,13 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function profile()
     {
-        //
+        return Inertia::render('Users/Profile', [
+            'auth' => [
+                'user' => auth()->user()
+            ]
+        ]);
     }
 
     /**
@@ -57,15 +62,27 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return Inertia::render('Users/EditProfile', [
+            'auth' => [
+                'user' => auth()->user()
+            ]
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, UserService $userService)
     {
-        //
+        try {
+            $data = $request->validated();
+            $user = auth()->user();
+            $userService->updateUser($data, $user);
+            return redirect('dashboard')->with('message', 'User Updated Successfully');
+        } catch (\Throwable $th) {
+            logger()->error($th);
+            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
+        }
     }
 
     /**

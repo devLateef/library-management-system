@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBookRequest extends FormRequest
+class UpdateTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,13 +22,7 @@ class UpdateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|string|max:255|min:3|unique:books,name',
-            'author' => 'bail|required|unique:books,isbn',
-            'publisher' => 'bail|required',
-            'isbn' => 'bail|required',
-            'accession_no' => 'bail|required',
-            'call_no' => 'bail|required',
-            'category' => 'bail|required'
+            //
         ];
     }
 }

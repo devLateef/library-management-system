@@ -13,11 +13,11 @@ const Navbar = () =>{
                 <ul
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                    <li><Link>Users</Link></li>
+                    <li><Link href={`#`}>Users</Link></li>
                     <li>
-                    <Link>Transactions</Link>
+                    <Link href={`#`}>Transactions</Link>
                     <ul className="p-2">
-                        <li><Link>Borrowed Books</Link></li>
+                        <li><Link href={`#`}>Borrowed Books</Link></li>
                         <li><Link>Download Report</Link></li>
                     </ul>
                     </li>
@@ -33,7 +33,7 @@ const Navbar = () =>{
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><Link>Users</Link></li>
+                        <li><Link href={`#`}>Users</Link></li>
                         <li>
                         <Link>Transactions</Link>
                         <ul className="p-2">
@@ -73,12 +73,12 @@ const Navbar = () =>{
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li>
-                <Link className="justify-between">
+                <Link className="justify-between" href={`/profile`}>
                     Profile
                     <span className="badge">New</span>
                 </Link>
                 </li>
-                <li><Link>Settings</Link></li>
+                <li><Link href={`/profile/update`}>Settings</Link></li>
                 <li><Link as="button" onClick={handleLogOut}>Logout</Link></li>
             </ul>
             </div>

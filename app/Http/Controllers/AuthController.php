@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Book;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AuthController extends Controller
@@ -30,7 +32,13 @@ class AuthController extends Controller
 
     public function showDashboard()
     {
-        return Inertia::render('Books/AllBooks');
+        $books = Book::latest()->paginate(5);
+        return Inertia::render('Books/AllBooks', [
+            'books' => $books,
+            'auth' => [
+                'user' => Auth::user(),
+            ],
+        ]);
     }
 
     public function register(RegisterRequest $request)

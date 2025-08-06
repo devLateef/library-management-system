@@ -26,4 +26,21 @@ use Illuminate\Support\Facades\Hash;
                 throw new CustomException('Unable to create book');
             }
         }
+
+        public function updateUser(array $data, User $user): User
+        {
+            try {
+                $user->first_name = $data['first_name'];
+                $user->last_name = $data['last_name'];
+                $user->phone = $data['phone'];
+                $user->dob = $data['dob'];
+                $user->role = $data['role'];
+                $user->email = $data['email'];
+                $user->save();
+                return $user;
+            } catch (\Throwable $th) {
+                logger()->error($th);
+                throw new CustomException('Something went wrong, try again.!');
+            }
+        }
     }

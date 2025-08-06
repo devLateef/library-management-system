@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import FlashMessage from "./FlashMessage";
 
 
@@ -22,7 +22,8 @@ const UserForm = () => {
             <div className="card bg-base-100 w-full max-w-4xl shadow-2xl">
                 <FlashMessage />
                 <div className="flex justify-between p-6">
-                <h1 className="text-4xl font-medium">Register New Librarian!</h1>
+                    <h1 className="text-4xl font-medium">Register New User!</h1>
+                    <Link className="btn btn-secondary" href={`/dashboard`}>Back</Link>
                 </div>
                 <div className="card-body">
                 <form className="grid grid-cols-2 gap-6" onSubmit={submit}>

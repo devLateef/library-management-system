@@ -1,14 +1,24 @@
-import { usePage } from '@inertiajs/react';
+import { useEffect, useState } from "react";
+import { usePage } from "@inertiajs/react";
 
 const FlashMessage = () => {
-    const { flash, errors } = usePage().props;
+    const { flash } = usePage().props;
+    const [visible, setVisible] = useState(false);
 
-    const hasErrors = errors && Object.keys(errors).length > 0;
+    useEffect(() => {
+        if (flash.message || flash.error) {
+            setVisible(true);
+            const timeout = setTimeout(() => {
+                setVisible(false);
+            }, 3000); // hide after 3s
+            return () => clearTimeout(timeout); // cleanup on unmount
+        }
+    }, [flash.message, flash.error]);
 
-    if (!flash.message && !flash.error && !hasErrors) return null;
+    if (!visible || (!flash.message && !flash.error)) return null;
 
     return (
-        <div className="my-4 space-y-2">
+        <div className="my-4">
             {flash.message && (
                 <div className="alert alert-success text-white">
                     {flash.message}
@@ -17,17 +27,6 @@ const FlashMessage = () => {
             {flash.error && (
                 <div className="alert alert-error text-white">
                     {flash.error}
-                </div>
-            )}
-            {hasErrors && (
-                <div className="alert alert-error">
-                    <ul className="list-disc pl-5">
-                        {Object.values(errors).map((fieldErrors, i) =>
-                            fieldErrors.map((msg, j) => (
-                                <li key={`${i}-${j}`}>{msg}</li>
-                            ))
-                        )}
-                    </ul>
                 </div>
             )}
         </div>

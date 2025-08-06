@@ -1,22 +1,26 @@
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import FlashMessage from "./FlashMessage";
 
 
-const BookForm = () => {
+const BookForm = ({book, isEdit}) => {
 
     const form = useForm({
-        name: '',
-        author: '',
-        publisher: '',
-        isbn: '',
-        accession_no: '',
-        call_no: '',
-        category: ''
-    })
+        name: book?.name || '',
+        author: book?.author || '',
+        publisher: book?.publisher || '',
+        isbn: book?.isbn || '',
+        accession_no: book?.accession_no || '',
+        call_no: book?.call_no || '',
+        category: book?.category || ''
+    });
 
     const submit = (e) => {
         e.preventDefault();
-        form.post('/books/create');;
+        if (isEdit) {
+            form.put(`/books/${book.id}`); // Use correct route
+        } else {
+            form.post('/books/create'); // Use your store route
+        }
       };
     return(
         <div className="flex items-center justify-center min-h-screen bg-base-200 -mt-20">
@@ -38,7 +42,8 @@ const BookForm = () => {
             )} */}
                 <FlashMessage />
                 <div className="flex justify-between p-6">
-                <h1 className="text-4xl font-medium">Register Book!</h1>
+                <h1 className="text-4xl font-medium">{isEdit ? "📚Update Book!" : "📚Register Book!"}</h1>
+                <Link className="btn btn-secondary" href={`/dashboard`}>Back</Link>
                 </div>
                 <div className="card-body">
                 <form className="grid grid-cols-2 gap-6" onSubmit={submit}>
@@ -107,13 +112,13 @@ const BookForm = () => {
                         <input type="text" 
                         name="category" 
                         className="input w-full" 
-                        placeholder="Enter call number" 
+                        placeholder="Enter book category" 
                         value={form.data.category}
                         onChange={e => form.setData('category', e.target.value)}
                         />
                     </div>
                     <div className="col-span-2 flex justify-center">
-                        <button type="submit" className="btn btn-primary w-3/4 mt-4">Register</button>
+                        <button type="submit" className="btn btn-primary w-3/4 mt-4">{isEdit ? "Update" : "Register"}</button>
                     </div>
                 </form>
                 </div>
