@@ -32,7 +32,7 @@ const UserForm = () => {
                         <input type="text" 
                         name="name" 
                         className="input w-full" 
-                        placeholder="Enter book name"
+                        placeholder="Enter first name"
                         value={form.data.first_name}
                         onChange={e => form.setData('first_name', e.target.value)}
                         />
@@ -42,7 +42,7 @@ const UserForm = () => {
                         <input type="text" 
                         name="author" 
                         className="input w-full" 
-                        placeholder="Enter author's name" 
+                        placeholder="Enter last name" 
                         value={form.data.last_name}
                         onChange={e => form.setData('last_name', e.target.value)}
                         />
@@ -52,7 +52,7 @@ const UserForm = () => {
                         <input type="number" 
                         name="publisher" 
                         className="input w-full" 
-                        placeholder="Enter publisher name" 
+                        placeholder="Enter phone number" 
                         value={form.data.phone}
                         onChange={e => form.setData('phone', e.target.value)}
                         />
@@ -62,7 +62,7 @@ const UserForm = () => {
                         <input type="date" 
                         name="isbn" 
                         className="input w-full" 
-                        placeholder="Enter book isbn" 
+                        placeholder="Enter date of birth" 
                         value={form.data.dob}
                         onChange={e => form.setData('dob', e.target.value)}
                         />
@@ -72,7 +72,7 @@ const UserForm = () => {
                         <input type="email" 
                         name="accession_no" 
                         className="input w-full" 
-                        placeholder="Enter accession number" 
+                        placeholder="Enter your email" 
                         value={form.data.email}
                         onChange={e => form.setData('email', e.target.value)}
                         />
@@ -85,6 +85,7 @@ const UserForm = () => {
                         >
                             <option value="">Select Role</option>
                             <option value="Librarian">Librarian</option>
+                            <option value="Staff">A Staff</option>
                             <option value="User">A User</option>
                         </select>
                     </div>
