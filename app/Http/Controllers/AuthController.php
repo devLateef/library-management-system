@@ -53,7 +53,7 @@ class AuthController extends Controller
     
             return redirect('/login')->with('message', 'Registration successful! Please log in.');
         } catch (\Throwable $th) {
-            logger($th);
+            logger()->error($th);
             // For custom errors not caught by validation
             return redirect()->back()->with('error', 'Something went wrong. Please try again.');
         }

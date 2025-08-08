@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
             'level' => 'bail|required',
             'department' => 'bail|required',
             'email' => 'bail|required|email|unique:users,email',
-            'password' => 'bail|required|confirmed|min:8'
+            'password' => 'required|confirmed|min:8'
         ];
     }
 }

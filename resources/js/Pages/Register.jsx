@@ -2,7 +2,6 @@ import { Link, useForm } from "@inertiajs/react";
 import FlashMessage from "./FlashMessage";
 
 const Register = () => {
-
     const form = useForm({
         first_name: '',
         last_name: '',
@@ -13,11 +12,12 @@ const Register = () => {
         department: '',
         email: '',
         password: '',
-        confirm_password: ''
+        password_confirmation: ''
     })
 
     const submit = (e) => {
         e.preventDefault();
+        console.log(form.data);
         form.post('/register');;
       };
     return(
@@ -130,11 +130,11 @@ const Register = () => {
                     <div>
                         <label className="label">Confirm Password</label>
                         <input type="password" 
-                        name="confirm_password" 
+                        name="password_confirmation" 
                         className="input w-full" 
                         placeholder="Confirm Password"
-                        value={form.data.confirm_password}
-                        onChange={e => form.setData('confirm_password', e.target.value)} 
+                        value={form.data.password_confirmation}
+                        onChange={e => form.setData('password_confirmation', e.target.value)} 
                         />
                     </div>
                     <div className="col-span-2 flex justify-center">

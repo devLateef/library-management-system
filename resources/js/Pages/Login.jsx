@@ -17,9 +17,9 @@ const Login = () => {
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                 <FlashMessage />
 
-                <div className="flex justify-between mr-8 mt-4 items-center">
+                <div className="mr-8 mt-4 items-center">
                     <h1 className="text-4xl font-medium px-4 py-2">Login now!</h1>
-                    <Link className="btn btn-primary" href="/">home</Link>
+                    {/* <Link className="btn btn-primary" href="/">home</Link> */}
                 </div>
 
                 <div className="card-body">
